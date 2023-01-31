@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest
+@WebMvcTest(ProductController.class)
 class ProductControllerTest {
 
     @Autowired
@@ -44,7 +44,7 @@ class ProductControllerTest {
     void hello() throws Exception {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/api/v1/public/hello").accept(MediaType.APPLICATION_JSON))
-            .andDo(print()).andExpect(status().isOk());
+            .andDo(print()).andExpect(status().isOk()).andExpect(content().string("Hello world!"));
     }
 
     @Test
@@ -88,7 +88,7 @@ class ProductControllerTest {
     }
 
     @Test
-    @DisplayName("Successully delete Product")
+    @DisplayName("Successfully delete Product")
     void deleteProduct() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/secured/product/{id}", 1))
             .andDo(print()).andExpect(status().isOk());
