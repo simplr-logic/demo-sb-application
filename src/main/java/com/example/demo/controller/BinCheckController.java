@@ -17,7 +17,7 @@ public class BinCheckController {
     private final BinListRestService binListRestService;
 
     // sample bin: 45717360
-    @GetMapping("/public/bin/{bin}")
+    @GetMapping("/public/bins/{bin}")
     public ResponseEntity<BinList> getBinList(@PathVariable("bin") String bin) {
         return ResponseEntity.ok().body(binListRestService.retrieveBinList(bin));
     }

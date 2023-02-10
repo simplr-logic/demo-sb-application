@@ -31,25 +31,25 @@ public class ProductController {
         return ResponseEntity.ok().body(productService.getAllProducts());
     }
 
-    @GetMapping("/public/product/{productCode}")
+    @GetMapping("/public/products/{productCode}")
     public ResponseEntity<ProductResp> getProductByProductCode(
-        @PathVariable("productCode") @NotBlank String productCode) {
+        @PathVariable("productCode") String productCode) {
         return ResponseEntity.ok().body(productService.getProductByProductCode(productCode));
     }
 
-    @PostMapping("/secured/product")
+    @PostMapping("/secured/products")
     public ResponseEntity<ProductResp> createProduct(@RequestBody @Valid Product product) {
         return ResponseEntity.ok().body(productService.createNewProduct(product));
     }
 
-    @PatchMapping("/secured/product/{id}")
+    @PatchMapping("/secured/products/{id}")
     public ResponseEntity<ProductResp> updateProduct(@RequestBody @Valid Product product,
         @PathVariable("id") @NotBlank int id) {
         product.setId(id);
         return ResponseEntity.ok().body(productService.updateProduct(product));
     }
 
-    @DeleteMapping("/secured/product/{id}")
+    @DeleteMapping("/secured/products/{id}")
     public void deleteProduct(@PathVariable("id") @NotBlank int id) {
         productService.deleteProduct(id);
     }

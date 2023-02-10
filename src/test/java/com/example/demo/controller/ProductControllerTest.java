@@ -59,7 +59,7 @@ class ProductControllerTest {
     @Test
     @DisplayName("Get by product code with correct data")
     void getProductByProductCode() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/public/product/{id}", 1)).andDo(print())
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/public/products/{id}", 1)).andDo(print())
             .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").exists())
             .andExpect(jsonPath("$.productCode").value("code"));
@@ -68,7 +68,7 @@ class ProductControllerTest {
     @Test
     @DisplayName("Successfully create new Product")
     void createProduct() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/secured/product")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/secured/products")
                 .contentType(MediaType.APPLICATION_JSON).content(
                     "{\"productCode\":\"code001\",\"productBrand\":\"Sammie\", \"productName\":\"A52s\", \"quatity\":1, \"price\":1000}"))
             .andDo(print()).andExpect(status().isOk())
@@ -79,7 +79,7 @@ class ProductControllerTest {
     @Test
     @DisplayName("Successfully update Product")
     void updateProduct() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/secured/product/{id}", 1)
+        mockMvc.perform(MockMvcRequestBuilders.patch("/api/v1/secured/products/{id}", 1)
                 .contentType(MediaType.APPLICATION_JSON).content(
                     "{\"productCode\":\"code001\",\"productBrand\":\"Sammie\", \"productName\":\"A52s\", \"quatity\":1, \"price\":1000}"))
             .andDo(print()).andExpect(status().isOk())
@@ -90,7 +90,7 @@ class ProductControllerTest {
     @Test
     @DisplayName("Successfully delete Product")
     void deleteProduct() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/secured/product/{id}", 1))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/secured/products/{id}", 1))
             .andDo(print()).andExpect(status().isOk());
     }
 }
